@@ -1,5 +1,6 @@
 ﻿using Application.Dto;
 using Application.Interface.Person;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ namespace WebApp.Controllers
 {
     [Route("api/[controller]/[action]")]
     [ApiController]
+    
     public class PersonController : ControllerBase
     {
         private readonly IPersonService _service;
@@ -18,6 +20,7 @@ namespace WebApp.Controllers
         {
             _service = service;
         }
+        [Authorize]
         [HttpGet("{building}")]
         public async  Task<IEnumerable<PersonDto>> GetPersonByBuilding(string building)
         {
