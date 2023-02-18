@@ -16,5 +16,6 @@ namespace Domain.Repository.UserRepository
         Task<UserModel> UpdatePersonAsync(UserModel person);
         Task DeletePersonAsync(int personId);
         Task SaveAsync();
+        Task<bool> CheckUserExist(UserViewModel user);
     }
 }

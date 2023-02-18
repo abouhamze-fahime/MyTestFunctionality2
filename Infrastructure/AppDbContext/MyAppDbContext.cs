@@ -15,5 +15,7 @@ namespace Infrastructure.AppDbContext
 
         }
         public DbSet<UserModel> tblUsers { get; set; }
+        public DbSet<UserViewModel> UserSecurity { get; set; }
+
     }
 }

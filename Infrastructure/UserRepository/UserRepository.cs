@@ -24,6 +24,20 @@ namespace Infrastructure.UserRepository
             return person;
         }
 
+        public async Task<bool> CheckUserExist(UserViewModel user)
+        {
+            var us = await _context.UserSecurity.AnyAsync(u => u.UserName == user.UserName && u.Password == user.Password);
+
+            if (us)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public async Task DeletePersonAsync(int personId)
         {
           var person =  await _context.tblUsers.FindAsync(personId);

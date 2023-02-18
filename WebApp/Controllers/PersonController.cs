@@ -18,23 +18,23 @@ namespace WebApp.Controllers
         {
             _service = service;
         }
-        [HttpGet]
+        [HttpGet("{building}")]
         public async  Task<IEnumerable<PersonDto>> GetPersonByBuilding(string building)
         {
             return await _service.GetPeopleByBuilding(building);
         }
 
-        [HttpGet]
-        public async Task< IEnumerable<PersonDto>> GetPeopleBySomeInfo(string fullName, int? internalNumber, int? personelCode)
+        [HttpPost("info")]
+        public async Task< IEnumerable<PersonDto>> GetPeopleBySomeInfo(PersonInfoDto personInfo)
         {
-            var personLst= await _service.GetPeopleByInputFilter(fullName, internalNumber, personelCode);
+            var personLst= await _service.GetPeopleByInputFilter( personInfo);
             return personLst;
         }
         [HttpPut]
-        public async Task<int> UpdatePerson(PersonDto person)
+        public async Task<PersonDto> UpdatePerson(PersonDto person)
         {
            await _service.UpdatePerson(person);
-            return person.Id;
+            return person;
 
         }
 
@@ -46,8 +46,8 @@ namespace WebApp.Controllers
         }
 
 
-        [HttpDelete]
-        public async Task DeletePerson(int id)
+        [HttpDelete("{id}")]
+        public async Task DeletePerson( int id)
         {
            await _service.DeletePerson(id);
 

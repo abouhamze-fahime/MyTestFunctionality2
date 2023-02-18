@@ -29,6 +29,12 @@ namespace Application.Service
             return person;
         }
 
+        public async Task<bool> CheckUserExist(UserViewModel user)
+        {
+           return await  _userRepository.CheckUserExist(user);
+
+        }
+
         public async Task DeletePerson(int personId)
         {
            await _userRepository.DeletePersonAsync(personId);
@@ -40,9 +46,9 @@ namespace Application.Service
             return _mapper.Map<IEnumerable<PersonDto>>(peoplelst);
         }
 
-        public async Task<IEnumerable<PersonDto>> GetPeopleByInputFilter(string fullName, int? internalNumber, int? personelCode)
+        public async Task<IEnumerable<PersonDto>> GetPeopleByInputFilter(PersonInfoDto personInfo)
         {
-            var peoplelst = await _userRepository.GetPeopleListByInputFilterAsync(fullName , internalNumber , personelCode);
+            var peoplelst = await _userRepository.GetPeopleListByInputFilterAsync(personInfo.fullName, personInfo.internalNumber , personInfo.personelCode);
             return _mapper.Map<IEnumerable<PersonDto>>(peoplelst);
         }
 

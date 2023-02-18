@@ -1,4 +1,5 @@
 ﻿using Application.Interface.Person;
+using Application.Interface.Token;
 using Application.Profiles;
 using Application.Service;
 using AutoMapper;
@@ -28,7 +29,8 @@ namespace Application
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IPersonService, PersonService>();
             services.AddScoped<IUserRepository, UserRepository>();
-   
+            services.AddScoped<ITokenGenerator, TokenGenerator>();
+
             //  return services;
         }
     }
